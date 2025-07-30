@@ -1,7 +1,9 @@
 "use client"
+
 import type React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Briefcase } from "lucide-react";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -14,7 +16,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <div className="bg-blue-600 text-white p-2 rounded-lg mr-3">
-                {/* <Briefcase className="h-6 w-6" /> */}
+                <Briefcase className="h-6 w-6" />
               </div>
               <span className="text-2xl font-bold text-gray-900">
                 SkillBridge
