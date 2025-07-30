@@ -65,32 +65,32 @@ export default function Home() {
       
 
       {/* Stats Section */}
-      {/* <section className="py-16 bg-white">
+      <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div className="flex flex-col items-center">
-              <Users className="h-12 w-12 text-blue-600 mb-4" />
+              {/* <Users className="h-12 w-12 text-blue-600 mb-4" /> */}
               <h3 className="text-3xl font-bold text-gray-900">10K+</h3>
               <p className="text-gray-600">Active Freelancers</p>
             </div>
             <div className="flex flex-col items-center">
-              <Briefcase className="h-12 w-12 text-green-600 mb-4" />
+              {/* <Briefcase className="h-12 w-12 text-green-600 mb-4" /> */}
               <h3 className="text-3xl font-bold text-gray-900">5K+</h3>
               <p className="text-gray-600">Projects Completed</p>
             </div>
             <div className="flex flex-col items-center">
-              <Star className="h-12 w-12 text-yellow-600 mb-4" />
+              {/* <Star className="h-12 w-12 text-yellow-600 mb-4" /> */}
               <h3 className="text-3xl font-bold text-gray-900">4.8</h3>
               <p className="text-gray-600">Average Rating</p>
             </div>
             <div className="flex flex-col items-center">
-              <MessageSquare className="h-12 w-12 text-purple-600 mb-4" />
+              {/* <MessageSquare className="h-12 w-12 text-purple-600 mb-4" /> */}
               <h3 className="text-3xl font-bold text-gray-900">24/7</h3>
               <p className="text-gray-600">Support Available</p>
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
 
 
 

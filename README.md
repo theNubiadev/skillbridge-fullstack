@@ -125,6 +125,8 @@ skillbridge/
 │   │   ├── route.ts
 │   └── profile/
 │       └── route.ts
+├── components/
+│   ├── Navbar.tsx
 ├── styles/
 │   └── globals.css
 ├── .env.local
