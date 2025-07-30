@@ -92,9 +92,61 @@ export default function Home() {
         </div>
       </section>
 
-
-
+      {/*  Featured Freelancers */}
+      <section className="py-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2>Featured Freelancers</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featuredFreelancers.map((freelancer) => (
+              <div key={freelancer.id} className="hover:shadow-lg transition-shadow">
+                <div className="text-center">
+                  <picture>
+                       <img
+                    src={freelancer.image || "/placeholder.svg"}
+                    alt={freelancer.name}
+                    className="w-20 h-20 rounded-full mx-auto mb-4"
+                  />
+                  </picture>
+                  <h3 className="text-black  ">{freelancer.name}</h3>
+                  <p className="text-black">{ freelancer.title}</p>
+                </div>
+                
+                <div className="text-center">
+                  <div className="flex items-center justify-center mb-3">
+                    <span className="ml-1 font-semibold ">{ freelancer.rating}</span>
+                  </div>
+                  <p className="text-2xl font-bold text-green-600 mb-4">${ freelancer.hourlyRate}</p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {freelancer.skills.map((skill) => (
+                      <span key={skill} className="text-black bg-white">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       
+      {/* Recent Posted Jobs */}
+      <section className="py-16 bg-gray-50 px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-blue-600 text-center mb-12">Recent Job Postings</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {recentJobs.map((job) => (
+              <div key={job.id} className="hover:shadow-lg transition-shadow" >
+                <div className="font-bold">
+                  <h3 className="text-xl"> {job.title}</h3>
+                  <p className="text-green-600 font-semibold"> { job.budget}</p>
+                </div>
+
+              </div>
+            ))}
+          </div>
+        </div>
+              </section>
             {/* CTA Section */}
       <section className="py-20 bg-blue-600 text-white">
         <div className="max-w-4xl mx-auto text-center px-4">

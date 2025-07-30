@@ -1,5 +1,5 @@
 import React from "react";
-
+import Link from "next/link";
 export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -10,6 +10,16 @@ export default function RegisterPage() {
           <p className="text-gray-600">Find the perfect freelancer for your project</p>
         </div>
       </div>
+
+
+       <div className="mt-6 text-center">
+            <p className="text-sm text-gray-600">
+              Already have an account?{" "}
+              <Link href="/auth/login" className="text-blue-600 hover:underline">
+                Sign in
+              </Link>
+            </p>
+          </div>
     </div>
   );
 }
