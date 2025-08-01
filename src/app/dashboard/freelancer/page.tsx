@@ -10,7 +10,7 @@ import { Briefcase, DollarSign, Star, TrendingUp, Clock, CheckCircle, XCircle, E
 import Link  from "next/link";
 import { useAuth } from "@/lib/auth-context";
 export default function FreelancerDashboard() {
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
     const stats = {
     totalEarnings: 12450,
@@ -98,9 +98,9 @@ export default function FreelancerDashboard() {
     }
   }
 
-   if (!user) {
-    return <div>Loading...</div>
-  }
+  //  if (!user) {
+  //   return <div>Loading...</div>
+  // }
 
 
   return (
@@ -110,13 +110,13 @@ export default function FreelancerDashboard() {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Avatar className="h-16 w-16">
+              {/* <Avatar className="h-16 w-16">
                 <AvatarImage src={user.avatar || "/placeholder.svg"} alt={user.name} />
                 <AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-              </Avatar>
+              </Avatar> */}
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">Welcome back, {user.name}!</h1>
-                <p className="text-gray-600">Here's what's happening with your freelance work</p>
+                {/* <h1 className="text-3xl font-bold text-gray-900">Welcome back, {user.name}!</h1> */}
+                <p className="text-gray-600">Here&apos;s what&apos;s happening with your freelance work</p>
               </div>
             </div>
             <div className="flex space-x-3">
@@ -191,7 +191,7 @@ export default function FreelancerDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Active Projects</CardTitle>
-                <CardDescription>Projects you're currently working on</CardDescription>
+                <CardDescription>Projects you`&apos`re currently working on</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
