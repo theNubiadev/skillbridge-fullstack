@@ -1,4 +1,10 @@
- import { Star, Users, Briefcase, MessageSquare } from "lucide-react"
+import Link from "next/link";
+import { Star, Users, Briefcase, MessageSquare } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardTitle, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+
+
 export default function Home() {
   const featuredFreelancers = [
     {
@@ -60,6 +66,14 @@ export default function Home() {
             SkillBridge is the premier platform where talented freelancers meet ambitious clients. Build your dream
             project with the perfect match.
           </p>
+           <div className="flex gap-4 justify-center flex-wrap">
+            <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700">
+              <Link href="/auth/register?type=client">Hire Freelancers</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link href="/auth/register?type=freelancer">Find Work</Link>
+            </Button>
+          </div>
           </div>
       </section>
       
@@ -93,60 +107,77 @@ export default function Home() {
       </section>
 
       {/*  Featured Freelancers */}
-      <section className="py-16 px-4">
+       <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2>Featured Freelancers</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Featured Freelancers</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {featuredFreelancers.map((freelancer) => (
-              <div key={freelancer.id} className="hover:shadow-lg transition-shadow">
-                <div className="text-center">
+              <Card key={freelancer.id} className="hover:shadow-lg transition-shadow">
+                <CardHeader className="text-center">
                   <picture>
-                       <img
+                    <img
                     src={freelancer.image || "/placeholder.svg"}
                     alt={freelancer.name}
                     className="w-20 h-20 rounded-full mx-auto mb-4"
-                  />
-                  </picture>
-                  <h3 className="text-black  ">{freelancer.name}</h3>
-                  <p className="text-black">{ freelancer.title}</p>
-                </div>
-                
-                <div className="text-center">
+                    />
+                    </picture>
+                  <CardTitle>{freelancer.name}</CardTitle>
+                  <CardDescription>{freelancer.title}</CardDescription>
+                </CardHeader>
+                <CardContent className="text-center">
                   <div className="flex items-center justify-center mb-3">
-                    <span className="ml-1 font-semibold ">{ freelancer.rating}</span>
+                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    <span className="ml-1 font-semibold">{freelancer.rating}</span>
                   </div>
-                  <p className="text-2xl font-bold text-green-600 mb-4">${ freelancer.hourlyRate}</p>
+                  <p className="text-2xl font-bold text-green-600 mb-4">${freelancer.hourlyRate}/hr</p>
                   <div className="flex flex-wrap gap-2 justify-center">
                     {freelancer.skills.map((skill) => (
-                      <span key={skill} className="text-black bg-white">
+                      <Badge key={skill} variant="secondary">
                         {skill}
-                      </span>
+                      </Badge>
                     ))}
                   </div>
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </section>
       
       {/* Recent Posted Jobs */}
-      <section className="py-16 bg-gray-50 px-4">
+        <section className="py-16 bg-gray-50 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-blue-600 text-center mb-12">Recent Job Postings</h2>
+          <h2 className="text-3xl font-bold text-center  mb-12">Recent Job Posts</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {recentJobs.map((job) => (
-              <div key={job.id} className="hover:shadow-lg transition-shadow" >
-                <div className="font-bold">
-                  <h3 className="text-xl"> {job.title}</h3>
-                  <p className="text-green-600 font-semibold"> { job.budget}</p>
-                </div>
-
-              </div>
+              <Card key={job.id} className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <CardTitle className="text-xl">{job.title}</CardTitle>
+                  <CardDescription className="text-green-600 font-semibold">{job.budget}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">{job.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {job.tags.map((tag) => (
+                      <Badge key={tag} variant="outline">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                  <p className="text-sm text-gray-500">Posted by {job.postedBy}</p>
+                </CardContent>
+              </Card>
             ))}
           </div>
+          <div className="text-center mt-8">
+            <Button asChild variant="outline">
+              <Link href="/jobs">View All Jobs</Link>
+            </Button>
+          </div>
         </div>
-              </section>
+      </section>
+      
+
             {/* CTA Section */}
       <section className="py-20 bg-blue-600 text-white">
         <div className="max-w-4xl mx-auto text-center px-4">
@@ -155,7 +186,7 @@ export default function Home() {
             Join thousands of freelancers and clients who trust SkillBridge for their projects
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            {/* <Button asChild size="lg" variant="secondary">
+            <Button asChild size="lg" variant="secondary">
               <Link href="/auth/register">Sign Up Now</Link>
             </Button>
             <Button
@@ -165,7 +196,7 @@ export default function Home() {
               className="text-white border-white hover:bg-white hover:text-blue-600 bg-transparent"
             >
               <Link href="/auth/login">Login</Link>
-            </Button> */}
+            </Button>
           </div>
         </div>
       </section>
