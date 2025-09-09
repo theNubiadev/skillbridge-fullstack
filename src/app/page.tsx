@@ -303,7 +303,6 @@ export default function Home() {
         </div>
       </section>
       
-
             {/* CTA Section */}
       <section className="py-20 bg-blue-600 text-white">
         <div className="max-w-4xl mx-auto text-center px-4">
