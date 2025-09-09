@@ -15,7 +15,7 @@ export default function Navbar() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
-              <div className="bg-blue-600 text-white p-2 rounded-lg mr-3">
+              <div className=" text-black outline p-2 rounded-lg mr-3">
                 <Briefcase className="h-6 w-6" />
               </div>
               <span className="text-2xl font-bold text-gray-900">
@@ -42,12 +42,9 @@ export default function Navbar() {
               Find Freelancers
             </Link>
                   </div>
-                  
 
                   <div className="flex items-center space-x-4 ">
-                      {/* { ? (): (
-                          
-                      )} */}
+                      
                   </div>
         </div>
       </div>

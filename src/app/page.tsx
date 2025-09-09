@@ -167,8 +167,9 @@ export default function Home() {
           <div className="animate-fade-in-up">
             <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
               Connect with Top{" "}
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent animate-gradient">
+              <span className="bg-clip-text  animate-gradient">
                 Freelancers
+                {/*  // bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600  */}
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed animate-fade-in-up delay-200">

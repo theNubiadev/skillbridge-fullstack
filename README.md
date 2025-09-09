@@ -110,7 +110,7 @@ skillbridge/
 │   ├── JobCard.tsx
 │   └── ProfileForm.tsx
 ├── lib/
-│   ├── db.ts
+│   ├── mongodb.js
 │   ├── auth.ts
 │   └── middleware.ts
 ├── models/
