@@ -77,10 +77,27 @@ export default function ProfilePage() {
 
         }))
     }
-      const reviews = {
-
-      }
-  
+      const reviews = [
+         {
+      id: 1,
+      clientName: "TechCorp Inc.",
+      clientAvatar: "/placeholder.svg?height=40&width=40",
+      rating: 5,
+      comment:
+        "Excellent work on our e-commerce platform. Sarah delivered high-quality code and was very responsive throughout the project.",
+      project: "E-commerce Website Development",
+      date: "2024-01-15",
+    },
+    {
+      id: 2,
+      clientName: "StartupXYZ",
+      clientAvatar: "/placeholder.svg?height=40&width=40",
+      rating: 5,
+      comment: "Outstanding developer! Completed the project ahead of schedule and exceeded our expectations.",
+      project: "React Dashboard",
+      date: "2024-01-10",
+    },
+      ]
     return (
     <div className="min-h-screen bg-gray=50 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
