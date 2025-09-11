@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SelectItem } from "@radix-ui/react-select";
+import { Badge, Plus,  X} from "lucide-react";
 export default function PostJobPage() {
   const [formData, setFormData] = useState({
     title: "",
@@ -184,6 +185,34 @@ export default function PostJobPage() {
               </div>
 
               {/*  Skills */}
+                             <div className="space-y-2">
+                <Label>Required Skills</Label>
+                <div className="flex gap-2">
+                  <Input
+                    placeholder="Add a skill"
+                    value={currentSkill}
+                    onChange={(e) => setCurrentSkill(e.target.value)}
+                    onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addSkill())}
+                  />
+                  <Button type="button" onClick={addSkill} variant="outline">
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+                {formData.skills.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {formData.skills.map((skill) => (
+                      <Badge key={skill} variant="secondary" className="flex items-center gap-1">
+                        {skill}
+                        <X className="h-3 w-3 cursor-pointer" onClick={() => removeSkill(skill)} />
+                      </Badge>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              
+              {/* Budget Type */}
+                  
             </form>
           </CardContent>
         </Card>

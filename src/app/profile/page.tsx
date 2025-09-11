@@ -11,12 +11,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-// import { AvatarImage } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge, Plus, X, Upload } from "lucide-react";
+import { Badge, Plus, X, Upload, Star, Trash2 } from "lucide-react";
 
 export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
@@ -36,8 +35,6 @@ export default function ProfilePage() {
     link: "",
   });
 
-  // const
-
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -51,37 +48,42 @@ export default function ProfilePage() {
     if (newPortfolioItem.title && newPortfolioItem.description) {
       const newItem = {
         ...newPortfolioItem,
-        image: newPortfolioItem.image || "./"
-      }
-      setPortfolioItems((prev) => [...prev, newItem])
-      setNewPortfolioItem({title: "", description: "", 
-        image: "", link: ""
-      })
+        image: newPortfolioItem.image || "./placeholder.svg",
+      };
+      setPortfolioItems((prev) => [...prev, newItem]);
+      setNewPortfolioItem({ title: "", description: "", image: "", link: "" });
     }
-  }
-    
- const addSkill = () => {
+  };
+
+  const removePortfolioItem = (index: number) => {
+    setPortfolioItems((prev) => prev.filter((_, i) => i !== index));
+    // toast({
+    //   title: "Portfolio item removed",
+    //   description: "The item has been removed from your portfolio.",
+    // })
+  };
+
+  const addSkill = () => {
     if (currentSkill.trim() && !formData.skills.includes(currentSkill.trim())) {
       setFormData((prev) => ({
         ...prev,
         skills: [...prev.skills, currentSkill.trim()],
-      }))
-      setCurrentSkill("")
+      }));
+      setCurrentSkill("");
     }
-  }
-   
-    const removeSkill = (skillToRemove: string) => {
-        setFormData((prev) => ({
-            ...prev,
-            skills: prev.skills.filter((skill) => skill !== skillToRemove),
+  };
 
-        }))
-    }
-      const reviews = [
-         {
+  const removeSkill = (skillToRemove: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      skills: prev.skills.filter((skill) => skill !== skillToRemove),
+    }));
+  };
+  const reviews = [
+    {
       id: 1,
       clientName: "TechCorp Inc.",
-      clientAvatar: "/placeholder.svg?height=40&width=40",
+      clientAvatar: "./placeholder.svg",
       rating: 5,
       comment:
         "Excellent work on our e-commerce platform. Sarah delivered high-quality code and was very responsive throughout the project.",
@@ -91,14 +93,15 @@ export default function ProfilePage() {
     {
       id: 2,
       clientName: "StartupXYZ",
-      clientAvatar: "/placeholder.svg?height=40&width=40",
+      clientAvatar: "./placeholder.svg",
       rating: 5,
-      comment: "Outstanding developer! Completed the project ahead of schedule and exceeded our expectations.",
+      comment:
+        "Outstanding developer! Completed the project ahead of schedule and exceeded our expectations.",
       project: "React Dashboard",
       date: "2024-01-10",
     },
-      ]
-    return (
+  ];
+  return (
     <div className="min-h-screen bg-gray=50 py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
@@ -113,7 +116,9 @@ export default function ProfilePage() {
         <Tabs className="space-y-6" defaultValue="profile">
           <TabsList>
             <TabsTrigger value="profile">Profile</TabsTrigger>
-            {"freelancer" && <TabsTrigger value="portfolio">Portfolio</TabsTrigger>}
+            {"freelancer" && (
+              <TabsTrigger value="portfolio">Portfolio</TabsTrigger>
+            )}
             {"freelancer" && <TabsTrigger value="reviews">Reviews</TabsTrigger>}
           </TabsList>
 
@@ -140,10 +145,9 @@ export default function ProfilePage() {
               <CardContent className="space-y-6">
                 {/* Avatar section */}
                 <div className="flex items-center space-x-4">
-                  <Avatar className="h-28 w-20">
+                  <Avatar className="h-28 w-28">
                     <picture>
-                      {" "}
-                      {/* <AvatarImage src={} alt={} /> */}
+                      <AvatarImage src="./placeholder.svg"  />
                     </picture>
                     <AvatarFallback className="text-2xl"></AvatarFallback>
                   </Avatar>
@@ -188,7 +192,7 @@ export default function ProfilePage() {
                     rows={4}
                     placeholder={
                       "Freelancer"
-                        ?  "Tell clients about your experience and expertisse..."
+                        ? "Tell clients about your experience and expertisse..."
                         : "Tell freelancers about your company and projects..."
                     }
                   />
@@ -232,19 +236,24 @@ export default function ProfilePage() {
                   {formData.skills.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-2">
                       {formData.skills.map((skill) => (
-                        <Badge key={skill} 
-                        className="flex items-center gap-1">
+                        <Badge key={skill} className="flex items-center gap-1">
                           {skill}
-                          {isEditing && 
-                            <X className="h-3 w-3 cursor-pointer"
-                              onClick={() => removeSkill(skill)} />}
-                          </Badge>
-                        ))}
+                          {isEditing && (
+                            <X
+                              className="h-3 w-3 cursor-pointer"
+                              onClick={() => removeSkill(skill)}
+                            />
+                          )}
+                        </Badge>
+                      ))}
                     </div>
                   )}
                   {isEditing && (
                     <div className="flex">
-                      <Button variant="outline"  onClick={() => setIsEditing(false)}>
+                      <Button
+                        variant="outline"
+                        onClick={() => setIsEditing(false)}
+                      >
                         Save
                       </Button>
                     </div>
@@ -253,7 +262,6 @@ export default function ProfilePage() {
               </CardContent>
             </Card>
           </TabsContent>
-
 
           <TabsContent value="portfolio">
             <div className="space-y-6">
@@ -269,132 +277,210 @@ export default function ProfilePage() {
                 <CardContent>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="portfolioTitle">
-                        Project Title
-                      </Label>
+                      <Label htmlFor="portfolioTitle">Project Title</Label>
                       <Input
-                       id="portfolioTitle"
+                        id="portfolioTitle"
                         placeholder="E-commerce Platform"
                         value="newPortfolio.title"
-                         onChange={(e) => setNewPortfolioItem((prev) => ({ ...prev, title: e.target.value }))}
-                        // onChange={(e) => setPortfolioItems(prev) => ({ ...prev, title: e.target.value}) }
+                        onChange={(e) =>
+                          setNewPortfolioItem((prev) => ({
+                            ...prev,
+                            title: e.target.value,
+                          }))
+                        }
                       />
                     </div>
-                    
-                    <div className="space-y-2">
-                        <Label htmlFor="portfolioLink">Project Link (Optional)</Label>
-                        <Input
-                          id="portfolioLink"
-                          placeholder="https://example.com"
-                          value={newPortfolioItem.link}
-                          onChange={(e) => setNewPortfolioItem((prev) => ({ ...prev, link: e.target.value }))}
-                        />
-                      </div>
-                  </div>
- <div className="space-y-2">
-                      <Label htmlFor="portfolioDescription">Description</Label>
-                      <Textarea
-                        id="portfolioDescription"
-                        placeholder="Describe the project, technologies used, and your role..."
-                        value={newPortfolioItem.description}
-                        onChange={(e) => setNewPortfolioItem((prev) => ({ ...prev, description: e.target.value }))}
-                        rows={3}
-                      />
-                  </div>
-                     <div className="space-y-2">
-                      <Label>Project Image</Label>
-                      <div className="flex items-center space-x-4">
-                        <Button variant="outline" size="sm">
-                          <Upload className="h-4 w-4 mr-2" />
-                          Upload Image
-                        </Button>
-                        <span className="text-sm text-gray-500">Or provide image URL</span>
-                      </div>
-                  </div>
-                  
-                   <Button
-                      onClick={addPortfolioItem}
-                      disabled={!newPortfolioItem.title || !newPortfolioItem.description}
-                    >
-                      Add to Portfolio
-                    </Button>
 
-                  </CardContent>
+                    <div className="space-y-2">
+                      <Label htmlFor="portfolioLink">
+                        Project Link (Optional)
+                      </Label>
+                      <Input
+                        id="portfolioLink"
+                        placeholder="https://example.com"
+                        value={newPortfolioItem.link}
+                        onChange={(e) =>
+                          setNewPortfolioItem((prev) => ({
+                            ...prev,
+                            link: e.target.value,
+                          }))
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="portfolioDescription">Description</Label>
+                    <Textarea
+                      id="portfolioDescription"
+                      placeholder="Describe the project, technologies used, and your role..."
+                      value={newPortfolioItem.description}
+                      onChange={(e) =>
+                        setNewPortfolioItem((prev) => ({
+                          ...prev,
+                          description: e.target.value,
+                        }))
+                      }
+                      rows={3}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>Project Image</Label>
+                    <div className="flex items-center space-x-4">
+                      <Button variant="outline" size="sm">
+                        <Upload className="h-4 w-4 mr-2" />
+                        Upload Image
+                      </Button>
+                      <span className="text-sm text-gray-500">
+                        Or provide image URL
+                      </span>
+                    </div>
+                  </div>
+
+                  <Button
+                    onClick={addPortfolioItem}
+                    disabled={
+                      !newPortfolioItem.title || !newPortfolioItem.description
+                    }
+                  >
+                    Add to Portfolio
+                  </Button>
+                </CardContent>
               </Card>
 
               <Card>
-              <  CardHeader>
-                                  <CardTitle>Portfolio Items</CardTitle>
-                    <CardDescription>Your showcase of completed projects</CardDescription>
+                <CardHeader>
+                  <CardTitle>Portfolio Items</CardTitle>
+                  <CardDescription>
+                    Your showcase of completed projects
+                  </CardDescription>
                 </CardHeader>
 
                 <CardContent>
                   {portfolioItems.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {portfolioItems.map((item ,index) => (
-                        <div key={index} className="border rounded-lg p-4">
+                      {/* {portfolioItems.map((item, index) => ( */}
+                       {portfolioItems.map((item, index) => (
+                        <div key={item} className="border rounded-lg p-4">
                           <div className="relative mb-4">
                             <picture>
-                              <img 
-                              src={item.image || "./placeholder.svg"}
-                              alt={item.title}
-                            className="w-full h-40 object-cover rounded-md"
-/>
-</picture>
-<Button size="sm" className="absolute top-2 right-2" onClick={() => removePortfolioItem(index)}>
-  <Trash2  className="h-4 w-4"/>
-  </Button>
-                
-                            </div>
-                             <h3 className="font-semibold mb-2">{item.title}</h3>
-                            <p className="text-sm text-gray-600 mb-3">{item.description}</p>
-                            {item.link && (
-                              <a
-                                href={item.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-blue-600 hover:underline text-sm"
-                              >
-                                View Project →
-                              </a>
-                            )}
+                              <img
+                                src={item.image || "./placeholder.svg"}
+                                alt={item.title}
+                                className="w-full h-40 object-cover rounded-md"
+                              />
+                            </picture>
+                            <Button
+                              size="sm"
+                              className="absolute top-2 right-2"
+                              onClick={() => removePortfolioItem(index)}
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
                           </div>
+                          <h3 className="font-semibold mb-2">{item.title}</h3>
+                          <p className="text-sm text-gray-600 mb-3">
+                            {item.description}
+                          </p>
+                          {item.link && (
+                            <a
+                              href={item.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-600 hover:underline text-sm"
+                            >
+                              View Project →
+                            </a>
+                          )}
+                        </div>
                       ))}
-                      </div>
-                  )
-                 
-                 
-                 
-                 : (
+                    </div>
+                  ) : (
                     <div className="text-center py-8">
-                      <p className="text-gray-500">No Portfolio Items yet. Add your files </p>
-                      </div>
+                      <p className="text-gray-500">
+                        No Portfolio Items yet. Add your files{" "}
+                      </p>
+                    </div>
                   )}
-                  </CardContent>
-                </Card>
-                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
 
-
-
           <TabsContent value="reviews">
-                    <Card> 
-                      <CardHeader> Client Reviews </CardHeader>
-                        <CardDescription className="ml-6 -mt-6">Feedback from your completed projects </CardDescription>
-                        <CardContent> 
-                          {reviews.length > 0  ? (
-                            <div>
+            <Card>
+              <CardHeader> Client Reviews </CardHeader>
+              <CardDescription className="ml-6 -mt-6">
+                Feedback from your completed projects{" "}
+              </CardDescription>
+              <CardContent>
+                {reviews.length > 0 ? (
+                  <div className="space-y-6">
+                    {reviews.map((review) => (
+                      <div
+                        key={review.id}
+                        className="border-b pb-6 last:border-b-0"
+                      >
+                        <div className="flex items-start space-x-4">
+                          <Avatar className="h-12 w-12">
+                            <AvatarImage
+                              src={review.clientAvatar || "/placeholder.svg"}
+                              alt={review.clientName}
+                            />
+                            <AvatarFallback>
+                              {review.clientAvatar.charAt(0)}
+                            </AvatarFallback>
+                          </Avatar>
+
+                          <div className="flex-1">
+                            <div className="flex items-start justify-between mb-2">
+                              <div className="flex">
+                                <div>
+                                  <h4 className="font-semibold">
+                                    {review.clientName}
+                                  </h4>
+                                  <p className="text-sm text-gray-600">
+                                    {review.project}
+                                  </p>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <div className="flex">
+                                    {[
+                                      ...Array(5).map((_i, i) => (
+                                        <Star
+                                          key={i}
+                                          className={`h-4 w-4 ${
+                                            i < review.rating
+                                              ? "text-yellow-400 fill-current "
+                                              : "text-gray-300"
+                                          }`}
+                                        />
+                                      )),
+                                    ]}
+                                  </div>
+
+                                  <span className="text-sm text-gray-500">
+                                    {review.date}
+                                  </span>
+                                </div>
                               </div>
-                          ) 
-                          :
-                           (
-                             <div className="text-center py-8">
-                      <p className="text-gray-500">No reviews yet. Complete your first project to receive feedback!</p>
-                    </div>
-                           )}
-                          </CardContent>
-                      </Card>
-            </TabsContent>
+                              <p className="text-gray-700">{review.comment}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <p className="text-gray-500">
+                      No reviews yet. Complete your first project to receive
+                      feedback!
+                    </p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
       </div>
     </div>
