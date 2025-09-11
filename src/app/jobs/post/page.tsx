@@ -13,6 +13,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
@@ -20,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Badge, Plus, X } from "lucide-react";
+import {  Plus, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function PostJobPage() {
@@ -38,6 +39,8 @@ export default function PostJobPage() {
     skills: [] as string[],
   });
 
+
+  console.log(formData.skills);
   const [currentSkill, setCurrentSkill] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -74,7 +77,10 @@ export default function PostJobPage() {
     setError("");
 
     try {
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      
+    }
   };
 
   const categories = [
@@ -214,13 +220,15 @@ export default function PostJobPage() {
                     }
                   />
                   <Button type="button" onClick={addSkill} variant="outline">
-                    <Plus className="h-4 w-4" />
+                   <Plus className="h-4 w-4"/>
                   </Button>
                 </div>
                 {formData.skills.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-2">
                     {formData.skills.map((skill) => (
-                      <Badge key={skill} className="flex items-center gap-1">
+                      <Badge key={skill}
+                        variant="secondary"
+                       className="flex items-center gap-1">
                         {skill}
                         <X
                           className="h-3 w-3 cursor-pointer"
@@ -232,9 +240,42 @@ export default function PostJobPage() {
                 )}
               </div>
 
+              {/* <div className="space-y-2">
+                <Label>Skills</Label>
+                <div className="flex gap-2">
+                  <Input
+                    placeholder="Add a skill"
+                    value={currentSkill}
+                    onChange={(e) => setCurrentSkill(e.target.value)}
+                    onKeyPress={(e) =>
+                      e.key === "Enter" && (e.preventDefault(), addSkill())
+                    }
+                  />
+                  <Button type="button" onClick={addSkill} variant="outline">
+                    Add
+                  </Button>
+                </div>
+                {formData.skills.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {formData.skills.map((skill) => (
+                      <Badge
+                        key={skill}
+                        className="flex items-center gap-1"
+                      >
+                        {skill}
+                        <X
+                          className="h-3 w-3 cursor-pointer"
+                          onClick={() => removeSkill(skill)}
+                        />
+                      </Badge>
+                    ))}
+                  </div> 
+                )}
+              </div> */}
+
               {/* Budget Type */}
               <div className="space-y-4">
-                <Label>Budget Type *</Label>
+                <Label>Budget Type *  </Label>
 
                 {formData.budgetType === "fixed" ? (
                   <div className="grid grid-cols-2 gap-4">
