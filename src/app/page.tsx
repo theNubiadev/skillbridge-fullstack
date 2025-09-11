@@ -156,8 +156,6 @@ export default function Home() {
           
     </div>
 
-        
-
     {/* Main Content */}
     <div className="relative z-10 max-w-6xl mx-auto text-center">
       <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
